@@ -39,13 +39,11 @@ $board-width: 1920px;
   transform-origin: bottom right;
   position: absolute;
   left: 110%;
+  transition: 0.4s linear transform;
   animation: zombieAnim 1s 0s infinite steps(9),
               zombieWalk 10s 0s linear;
-
-  &.die {
-
-  }
 }
+
 
 @keyframes zombieAnim {
   100% {

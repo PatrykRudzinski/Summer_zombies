@@ -39,14 +39,21 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        zombie.addEventListener('click', function () {
-            this.classList.add('die');
-            //this.remove();
-            boom.style.zIndex= '300';
+        zombie.addEventListener('click', function (e) {
+            const zombiePosition = window.getComputedStyle(this).left;
+            this.style.left = zombiePosition + 'px';
+            this.style.animationPlayState = 'paused';
+            this.style.transform += 'rotate(90deg)';
 
+            setTimeout(function(){
+                e.target.remove()
+            }, 600);
+
+            boom.style.zIndex= '300';
             setTimeout(function () {
                 boom.style.zIndex = '-1';
             }, 170)
+
 
 
         })
