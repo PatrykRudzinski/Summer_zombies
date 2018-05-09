@@ -2,6 +2,8 @@
 
 ### Shooter in HTML/CSS/VanillaJS
 
+[Live](https://patrykrudzinski.github.io/Summer_zombies/)
+
  ToDo:
  * death animation
  * layout
