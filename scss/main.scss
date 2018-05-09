@@ -12,17 +12,17 @@ $board-width: 1920px;
   overflow: hidden;
   position: relative;
   cursor: crosshair;
-  background: url("/img/background/back.png") bottom no-repeat,
-              url("/img/background/land.png"),
-              url("/img/background/sea.png"),
-              url("/img/background/sky.png");
+  background: url("../img/background/back.png") bottom no-repeat,
+              url("../img/background/land.png"),
+              url("../img/background/sea.png"),
+              url("../img/background/sky.png");
   background-size: contain;
 
   .clouds{
     position: absolute;
     height: calc(0.6 * 1080px);
     width: calc(0.6 * 1920px);
-    background: url("/img/background/cloud.png");
+    background: url("../img/background/cloud.png");
     background-size: contain;
     animation: wind 100s 0s infinite linear;
   }
@@ -35,7 +35,7 @@ $board-width: 1920px;
 .zombie {
   width: 200px;
   height: 312px;
-  background: url("/img/walkingdead.png");
+  background: url("../img/walkingdead.png");
   transform-origin: bottom right;
   position: absolute;
   left: 110%;
@@ -59,7 +59,7 @@ $board-width: 1920px;
 
 #boom {
   position: absolute;
-  background-image: url("/img/comic-2340467.svg");
+  background-image: url("../img/comic-2340467.svg");
   background-size: contain;
   background-repeat: no-repeat;
   height: 100px;
