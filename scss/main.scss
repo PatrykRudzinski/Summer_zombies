@@ -5,6 +5,9 @@ $board-width: 1920px;
   margin: 0;
   padding: 0;
 }
+body {
+  background-color: #151515;
+}
 
 .board {
   height: calc(0.6 * 1080px);
@@ -12,6 +15,7 @@ $board-width: 1920px;
   overflow: hidden;
   position: relative;
   cursor: crosshair;
+  margin: 10px auto;
   background: url("../img/background/back.png") bottom no-repeat,
               url("../img/background/land.png"),
               url("../img/background/sea.png"),
@@ -25,6 +29,24 @@ $board-width: 1920px;
     background: url("../img/background/cloud.png");
     background-size: contain;
     animation: wind 100s 0s infinite linear;
+  }
+  .pause{
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: calc(0.6 * 1080px);
+    width: calc(0.6 * 1920px);
+    background: rgba(#555, 0.85);
+    z-index: 350;
+
+    p {
+      font-family: sans-serif;
+      color: #aaa;
+      font-weight: bolder;
+      letter-spacing: 5px;
+      font-size: 72px;
+    }
   }
   @keyframes wind {
     from {background-position: 0 0;}
