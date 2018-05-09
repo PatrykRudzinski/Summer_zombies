@@ -1,0 +1,71 @@
+$board-height: 1080px;
+$board-width: 1920px;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.board {
+  height: calc(0.6 * 1080px);
+  width: calc(0.6 * 1920px);
+  overflow: hidden;
+  position: relative;
+  cursor: crosshair;
+  background: url("/img/background/back.png") bottom no-repeat,
+              url("/img/background/land.png"),
+              url("/img/background/sea.png"),
+              url("/img/background/sky.png");
+  background-size: contain;
+
+  .clouds{
+    position: absolute;
+    height: calc(0.6 * 1080px);
+    width: calc(0.6 * 1920px);
+    background: url("/img/background/cloud.png");
+    background-size: contain;
+    animation: wind 100s 0s infinite linear;
+  }
+  @keyframes wind {
+    from {background-position: 0 0;}
+    to {background-position: 1152px 0;}
+  }
+}
+
+.zombie {
+  width: 200px;
+  height: 312px;
+  background: url("/img/walkingdead.png");
+  transform-origin: bottom right;
+  position: absolute;
+  left: 110%;
+  animation: zombieAnim 1s 0s infinite steps(9),
+              zombieWalk 10s 0s linear;
+
+  &.die {
+
+  }
+}
+
+@keyframes zombieAnim {
+  100% {
+    background-position: -1800px 0;
+  }
+}
+
+@keyframes zombieWalk {
+  100% {
+    left: -300px;
+  }
+}
+
+#boom {
+  position: absolute;
+  background-image: url("/img/comic-2340467.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 100px;
+  width: 100px;
+  z-index: -1;
+  cursor: none;
+}
