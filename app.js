@@ -3,13 +3,33 @@ document.addEventListener('DOMContentLoaded', function () {
     const board = document.querySelector('#board');
     const boom = document.querySelector('#boom');
     const pause = document.querySelector('#pause');
-
+    const hp = document.querySelector('#hp');
+    const score = document.querySelector('#score>span');
+    
     let level = 0;
-    let score = 0;
+    let points = 0;
     let life = 3;
 
+    const generateHp = () => {
+        while(hp.firstChild){
+            hp.removeChild(hp.firstChild);
+        }
+        for ( let i = 0; i < life; i++ ) {
+            const heart = document.createElement('span');
+            hp.appendChild(heart)
+        }
+    };
+
+    const updateScore = () => {
+        score.innerText = points
+    };
+
+    updateScore();
+
+    generateHp();
+
     document.addEventListener('mouseenter', function(){
-        [...document.querySelectorAll('.zombie')].forEach(el=>el.style.animationPlayState = 'running')
+        [...document.querySelectorAll('.zombie')].forEach(el=>el.style.animationPlayState = 'running');
         pause.style.display = 'none';
 
         const time = setInterval(function () {
@@ -36,12 +56,15 @@ document.addEventListener('DOMContentLoaded', function () {
             zombie.addEventListener('animationend', function (e) {
                 if(e.animationName === 'zombieWalk') {
                     board.removeChild(this);
+                    life--;
+                    generateHp();
                 }
             });
 
             zombie.addEventListener('click', function (e) {
-                boom.style.transform = 'translateY('+(e.screenY-140)+'px)';
-                boom.style.transform += 'translateX('+(e.screenX-40)+'px)';
+                boom.style.transform = 'translateY('+(e.screenY-140-board.offsetTop)+'px)';
+                boom.style.transform += 'translateX('+(e.screenX-40-board.offsetLeft)+'px)';
+
                 const zombiePosition = window.getComputedStyle(this).left;
                 this.style.left = zombiePosition + 'px';
                 this.style.animationPlayState = 'paused';
@@ -51,12 +74,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     e.target.remove()
                 }, 600);
 
-                boom.style.zIndex= '300';
+                boom.style.zIndex= '600';
                 setTimeout(function () {
                     boom.style.zIndex = '-1';
-                }, 170)
+                }, 170);
 
-
+                points++;
+                updateScore();
 
             })
 

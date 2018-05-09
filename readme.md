@@ -5,8 +5,6 @@
 [Live](https://patrykrudzinski.github.io/Summer_zombies/)
 
  ToDo:
- * layout
- * score
- * hp
+ * loader
  * start/end game
  * svg palms    

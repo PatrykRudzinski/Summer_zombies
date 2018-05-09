@@ -79,7 +79,7 @@ body {
   }
 }
 
-#boom {
+.boom {
   position: absolute;
   background-image: url("../img/comic-2340467.svg");
   background-size: contain;
@@ -88,4 +88,34 @@ body {
   width: 100px;
   z-index: -1;
   cursor: none;
+}
+
+.info {
+  width: calc(0.6 * 1920px);
+  height: 50px;
+  margin: 5px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .hp {
+    height: 100%;
+    display: flex;
+    span {
+      display: block;
+      height: 100%;
+      width: 56px;
+      background-image: url("../img/Real-heart-clipart-2.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .score {
+    font-family: sans-serif;
+    color: #aaa;
+    font-weight: bolder;
+    letter-spacing: 5px;
+    font-size: 32px;
+  }
 }
