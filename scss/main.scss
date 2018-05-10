@@ -7,6 +7,9 @@ $board-width: 1920px;
 }
 body {
   background-color: #151515;
+  //font-family: 'Pangolin', cursive;
+  font-family: 'Freckle Face', cursive;
+  //font-family: 'Frijole', cursive;
 }
 
 .board {
@@ -41,7 +44,6 @@ body {
     z-index: 350;
 
     p {
-      font-family: sans-serif;
       color: #aaa;
       font-weight: bolder;
       letter-spacing: 5px;
@@ -52,6 +54,19 @@ body {
     from {background-position: 0 0;}
     to {background-position: 1152px 0;}
   }
+
+  &.shake {
+    animation: shakeBoard 0.5s 0s forwards linear;
+  }
+
+  @keyframes shakeBoard {
+    0%{transform: rotate(0)}
+    10%{transform: rotate(-3deg)}
+    20%{transform: rotate(3deg)}
+    40%{transform: rotate(-2deg)}
+    60%{transform: rotate(2deg)}
+    100%{transform: rotate(0)}
+  }
 }
 
 .zombie {
@@ -60,7 +75,7 @@ body {
   background: url("../img/walkingdead.png");
   transform-origin: bottom right;
   position: absolute;
-  left: 110%;
+  left: 100%;
   transition: 0.4s linear transform;
   animation: zombieAnim 1s 0s infinite steps(9),
               zombieWalk 10s 0s linear;
@@ -75,7 +90,7 @@ body {
 
 @keyframes zombieWalk {
   100% {
-    left: -300px;
+    left: -200px;
   }
 }
 
@@ -86,8 +101,9 @@ body {
   background-repeat: no-repeat;
   height: 100px;
   width: 100px;
-  z-index: -1;
+  transform: scale(0);
   cursor: none;
+  z-index: 500;
 }
 
 .info {

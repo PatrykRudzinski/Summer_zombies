@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const pause = document.querySelector('#pause');
     const hp = document.querySelector('#hp');
     const score = document.querySelector('#score>span');
+
+
     
     let level = 0;
     let points = 0;
@@ -56,6 +58,10 @@ document.addEventListener('DOMContentLoaded', function () {
             zombie.addEventListener('animationend', function (e) {
                 if(e.animationName === 'zombieWalk') {
                     board.removeChild(this);
+                    board.classList.add('shake');
+                    setTimeout(function () {
+                        board.classList.remove('shake');
+                    }, 500);
                     life--;
                     generateHp();
                 }
@@ -74,9 +80,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     e.target.remove()
                 }, 600);
 
-                boom.style.zIndex= '600';
                 setTimeout(function () {
-                    boom.style.zIndex = '-1';
+                    boom.style.transform = 'scale(0)';
                 }, 170);
 
                 points++;
