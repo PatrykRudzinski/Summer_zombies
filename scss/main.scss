@@ -7,9 +7,46 @@ $board-width: 1920px;
 }
 body {
   background-color: #151515;
-  //font-family: 'Pangolin', cursive;
   font-family: 'Freckle Face', cursive;
-  //font-family: 'Frijole', cursive;
+}
+
+.loader{
+  top: 0;
+  z-index: 900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: darkred;
+  position: fixed;
+
+  .loading {
+    width: 200px;
+    height: 50px;
+    display: flex;
+
+    span {
+      display: block;
+      border-radius: 50%;
+      background-color: #ddd;
+      margin: 0 10px;
+      flex-grow: 1;
+      animation: loading2Anim 1s 0s infinite alternate;
+    }
+    @for $i from 1 through 25 {
+      $delay : 0.2s * $i;
+      span:nth-of-type(#{$i}) {
+        animation-delay: $delay;
+      }
+    }
+  }
+
+  @keyframes loading2Anim {
+    100% {
+      transform: translateY(20px);
+    }
+  }
 }
 
 .board {
@@ -25,7 +62,7 @@ body {
               url("../img/background/sky.png");
   background-size: contain;
 
-  .clouds{
+  .clouds {
     position: absolute;
     height: calc(0.6 * 1080px);
     width: calc(0.6 * 1920px);
@@ -33,15 +70,24 @@ body {
     background-size: contain;
     animation: wind 100s 0s infinite linear;
   }
-  .pause{
+
+  @keyframes wind {
+    from {background-position: 0 0;}
+    to {background-position: 1152px 0;}
+  }
+
+  .board_cover {
     position: absolute;
     display: none;
     justify-content: center;
     align-items: center;
     height: calc(0.6 * 1080px);
     width: calc(0.6 * 1920px);
-    background: rgba(#555, 0.85);
     z-index: 350;
+  }
+
+  .pause {
+    background: rgba(#555, 0.85);
 
     p {
       color: #aaa;
@@ -50,9 +96,33 @@ body {
       font-size: 72px;
     }
   }
-  @keyframes wind {
-    from {background-position: 0 0;}
-    to {background-position: 1152px 0;}
+
+  .end {
+    background: darkred;
+    flex-direction: column;
+    p {
+      color: #aaa;
+      font-weight: bolder;
+      letter-spacing: 5px;
+      font-size: 64px;
+    }
+    button {
+      margin-top: 100px;
+      background: none;
+      color: #aaa;
+      font-weight: bolder;
+      letter-spacing: 5px;
+      font-size: 72px;
+      border: 0;
+      font-family: 'Freckle Face', cursive;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+      &:focus{
+        outline: none;
+      }
+    }
   }
 
   &.shake {
@@ -101,7 +171,7 @@ body {
   background-repeat: no-repeat;
   height: 100px;
   width: 100px;
-  transform: scale(0);
+  transform: scale(1);
   cursor: none;
   z-index: 500;
 }
@@ -128,7 +198,6 @@ body {
   }
 
   .score {
-    font-family: sans-serif;
     color: #aaa;
     font-weight: bolder;
     letter-spacing: 5px;

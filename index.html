@@ -3,18 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Zombies...</title>
-    <link href="https://fonts.googleapis.com/css?family=Freckle+Face|Frijole|Pangolin" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Freckle+Face" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
 
 </head>
 <body>
+    <div id="loader" class="loader">
+        <div class="loading">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
     <section class="info">
         <article id="hp" class="hp"></article>
         <article id="score" class="score">SCORE: <span></span></article>
     </section>
     <div id="board" class="board">
         <div class="clouds"></div>
-        <div id="pause" class="pause"><p>PAUSE</p></div>
+        <div id="pause" class="board_cover pause"><p>PAUSE</p></div>
+        <div id="start" class="board_cover start"><button>START GAME</button></div>
+        <div id="end" class="board_cover end">
+            <p>END GAME</p>
+            <p>Your score: <span></span></p>
+            <button>Play Again</button>
+        </div>
         <div id="boom" class="boom"></div>
     </div>
 
