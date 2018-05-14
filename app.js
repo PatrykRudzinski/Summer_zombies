@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
-    
-    setTimeout(function(){
+
+
+    document.addEventListener('readystatechange', () => {
         boom.style.transform = 'scale(0)';
         document.querySelector('#loader').style.display = 'none';
-    }, 1000);
+    });
+
+
 
     const board = document.querySelector('#board');
     const boom = document.querySelector('#boom');
