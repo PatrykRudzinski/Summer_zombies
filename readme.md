@@ -6,4 +6,4 @@
 
  ToDo:
  * start/end game
- * rekfractoring
+ * refractoring!!!
