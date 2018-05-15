@@ -6,4 +6,6 @@
 
  ToDo:
  * start/end game
- * refractoring!!!
+ * pause
+ * interval
+ * 
