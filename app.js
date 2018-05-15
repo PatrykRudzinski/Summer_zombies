@@ -1,21 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    document.addEventListener('readystatechange', () => {
-        boom.style.transform = 'scale(0)';
-        document.querySelector('#loader').style.display = 'none';
-    });
+    // document.addEventListener('readystatechange', () => {
+    //     boom.style.transform = 'scale(0)';
+    //     document.querySelector('#loader').style.display = 'none';
+    // });
 
-    const board = document.querySelector('#board');
-    const boom = document.querySelector('#boom');
+    //const board = document.querySelector('#board');
+    //const boom = document.querySelector('#boom');
     const pause = document.querySelector('#pause');
     const start = document.querySelector('#start');
     const end = document.querySelector('#end');
     const hp = document.querySelector('#hp');
     const score = document.querySelector('#score>span');
 
-    let level = 0;
-    let points = 0;
-    let life = 3;
+    // let level = 0;
+    // let points = 0;
+    // let life = 3;
 
     const generateHp = () => {
         while(hp.firstChild){
@@ -42,27 +42,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const time = setInterval(function () {
 
-                const zombie = document.createElement('div');
-                zombie.classList.add('zombie');
+                //const zombie = document.createElement('div');
+                //zombie.classList.add('zombie');
 
-                const bottomPos = Math.floor(Math.random() * (150));
-                zombie.style.bottom = bottomPos + 'px';
-                zombie.style.zIndex = 150 - bottomPos + '';
+                // const bottomPos = Math.floor(Math.random() * (150));
+                // zombie.style.bottom = bottomPos + 'px';
+                // zombie.style.zIndex = 150 - bottomPos + '';
 
-                let min = 0.2;
-                let max = 1.1;
-                const scale = Math.random() * (max - min) + min;
-                zombie.style.transform = 'scale(' + scale + ')';
+                // let min = 0.2;
+                // let max = 1.1;
+                // const scale = Math.random() * (max - min) + min;
+                // zombie.style.transform = 'scale(' + scale + ')';
 
 
-                let walkSpeed = 5;
-                const speed = scale * 30 - (level * 2);
-                if (speed > 0) walkSpeed += speed;
-                console.log(walkSpeed);
-                const anim = '0.5s, ' + walkSpeed + 's';
-                zombie.style.animationDuration = anim;
+                // let walkSpeed = 5;
+                // const speed = scale * 30 - (level * 2);
+                // if (speed > 0) walkSpeed += speed;
+                // console.log(walkSpeed);
+                // const anim = '0.5s, ' + walkSpeed + 's';
+                // zombie.style.animationDuration = anim;
 
-                board.appendChild(zombie);
+                //board.appendChild(zombie);
 
                 zombie.addEventListener('animationend', function (e) {
                     if (e.animationName === 'zombieWalk') {
