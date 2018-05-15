@@ -1,12 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-
     document.addEventListener('readystatechange', () => {
         boom.style.transform = 'scale(0)';
         document.querySelector('#loader').style.display = 'none';
     });
-
-
 
     const board = document.querySelector('#board');
     const boom = document.querySelector('#boom');
@@ -16,8 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const hp = document.querySelector('#hp');
     const score = document.querySelector('#score>span');
 
-
-    
     let level = 0;
     let points = 0;
     let life = 3;
@@ -105,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }, 170);
 
                     points++;
-                    if (points % 3 == 0) level++;
+                    if (points % 3 === 0) level++;
                     console.log(level);
                     updateScore();
 
