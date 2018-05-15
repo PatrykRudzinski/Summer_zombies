@@ -4,24 +4,51 @@ document.addEventListener('DOMContentLoaded', function () {
     const boom = document.querySelector('#boom');
     const hp = document.querySelector('#hp');
     const scoreDisplay = document.querySelector('#score>span');
-    const startButton = document.querySelector('#start');
-    const startScreen = document.querySelector('#start');
+    const startButtons = document.querySelectorAll('.startBtn');
     const endScreen = document.querySelector('#end');
     const pauseScreen = document.querySelector('#pause');
+    const boardCovers = document.querySelectorAll('.board_cover');
 
+    let gameState = {};
+    let infinityWavesOfZombies; //interval
 
     //Hide loader
     document.addEventListener('readystatechange', () => {
-        boom.style.transform = 'scale(0)';
         document.querySelector('#loader').style.display = 'none';
+        boom.style.transform = 'scale(0)';
     });
 
-    let gameState = {
-        level : 0,
-        score : 0,
-        life : 3,
-        state : null
-    };
+    //Start game on click
+    [...startButtons].forEach((el)=>{
+        el.addEventListener('click', ()=>{
+
+            gameState.level = 0;
+            gameState.score = 0;
+            gameState.life = 3;
+            gameState.state = 'running';
+
+            screen.updateScore();
+            screen.generateHp();
+
+            game.start();
+        });
+    });
+
+    //Pause on mouse leave
+    document.addEventListener('mouseleave', function () {
+        if(gameState.state === 'running') {
+            game.pause();
+            gameState.state = 'paused';
+        }
+    });
+
+    //Resume on mouse in
+    document.addEventListener('mouseenter', function () {
+        if(gameState.state === 'paused') {
+            game.start();
+            gameState.state = 'running';
+        }
+    });
 
     const screen = {
 
@@ -32,27 +59,32 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 500);
         },
 
+        boom(e) {
+            boom.style.transform = 'translateY(' + (e.screenY - 140 - board.offsetTop) + 'px)';
+            boom.style.transform += 'translateX(' + (e.screenX - 40 - board.offsetLeft) + 'px)';
+
+            setTimeout(function () {
+                boom.style.transform = 'scale(0)';
+            }, 170);
+        },
+
         generateHp() {
             while(hp.firstChild){
                 hp.removeChild(hp.firstChild);
             }
+
             for ( let i = 0; i < gameState.life; i++ ) {
                 const heart = document.createElement('span');
                 hp.appendChild(heart)
             }
         },
 
-        boom(e) {
-            boom.style.transform = 'translateY(' + (e.screenY - 140 - board.offsetTop) + 'px)';
-            boom.style.transform += 'translateX(' + (e.screenX - 40 - board.offsetLeft) + 'px)';
-
-            setTimeout(function () {
-                    boom.style.transform = 'scale(0)';
-                }, 170);
+        updateScore() {
+            scoreDisplay.innerText = gameState.score
         },
 
         killZombie(zombie, e) {
-             const zombiePosition = window.getComputedStyle(zombie).left;
+            const zombiePosition = window.getComputedStyle(zombie).left;
             zombie.style.left = zombiePosition + 'px';
             zombie.style.animationPlayState = 'paused';
             zombie.style.transform += 'rotate(90deg)';
@@ -62,40 +94,35 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 600);
         },
 
-        updateScore() {
-            scoreDisplay.innerText = gameState.score
-        },
-
         removeZombies() {
             [...document.querySelectorAll('.zombie')].forEach(el => el.parentElement.removeChild(el))
-        },
-
-        endGame() {
-            endScreen.style.display = 'flex';
-            endScreen.children[1].children[0].innerText = gameState.score;
-            window.clearInterval(game);
-        },
-
-        pauseGame() {
-            window.clearInterval(game);
-            pauseScreen.style.display = 'flex';
-            [...document.querySelectorAll('.zombie')].forEach(el => el.style.animationPlayState = 'paused');
-        },
-
-        startGame() {
-            pauseScreen.style.display = 'none';
-            endScreen.style.display = 'none';
-            //startScreen.style.display = 'none';
-            [...document.querySelectorAll('.zombie')].forEach(el => el.style.animationPlayState = 'running');
-            game = window.setInterval(function () {
-                new Zombie().makeHimAlive();
-            }, 1000);
         }
 
     };
 
-    screen.updateScore();
-    screen.generateHp(); //todo
+    const game = {
+
+        start() {
+            [...boardCovers].forEach((el)=>el.style.display = 'none');
+            [...document.querySelectorAll('.zombie')].forEach(el => el.style.animationPlayState = 'running');
+            infinityWavesOfZombies = window.setInterval(function () {
+                new Zombie().makeHimAlive();
+            }, 1000);
+        },
+
+        pause() {
+            window.clearInterval(infinityWavesOfZombies);
+            pauseScreen.style.display = 'flex';
+            [...document.querySelectorAll('.zombie')].forEach(el => el.style.animationPlayState = 'paused');
+        },
+
+        end() {
+            endScreen.style.display = 'flex';
+            endScreen.children[1].children[0].innerText = gameState.score;
+            window.clearInterval(infinityWavesOfZombies);
+        }
+
+    };
 
     class Zombie {
 
@@ -122,13 +149,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     if (gameState.life <= 0) {
                         gameState.state = 'end';
-                        screen.endGame();
+                        game.end();
                         screen.removeZombies();
                     }
                 }
             });
 
-            this.zombie.addEventListener('click', function (e) {
+            this.zombie.addEventListener('click', function _func(e) {
                 gameState.score++;
                 screen.boom(e);
                 screen.killZombie(this, e);
@@ -162,15 +189,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
         
     }
-
-    document.addEventListener('mouseleave', function () {
-        screen.pauseGame();
-    });
-
-    document.addEventListener('mouseenter', function () {
-        screen.startGame();
-    });
-
-    let game;
 
 });

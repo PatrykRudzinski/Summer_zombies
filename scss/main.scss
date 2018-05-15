@@ -97,6 +97,29 @@ body {
     }
   }
 
+  .start {
+    display: flex;
+    background: #111;
+
+    button {
+      background: none;
+      color: #aaa;
+      font-weight: bolder;
+      letter-spacing: 5px;
+      font-size: 123px;
+      border: 0;
+      font-family: 'Freckle Face', cursive;
+      cursor: crosshair;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+
   .end {
     background: darkred;
     flex-direction: column;
@@ -149,6 +172,7 @@ body {
   transition: 0.4s linear transform;
   animation: zombieAnim 1s 0s infinite steps(9),
               zombieWalk 10s 0s linear;
+
 }
 
 

@@ -5,7 +5,4 @@
 [Live](https://patrykrudzinski.github.io/Summer_zombies/)
 
  ToDo:
- * start/end game
- * pause
- * interval
- * 
+ * remove event listener
