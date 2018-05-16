@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
-            this.zombie.addEventListener('click', function _func(e) {
+            this.zombie.addEventListener('mousedown', function _func(e) {
                 gameState.score++;
                 screen.boom(e);
                 screen.killZombie(this, e);
