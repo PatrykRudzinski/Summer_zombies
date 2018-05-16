@@ -10,3 +10,4 @@ You are on beach in sunny day. And suddenly zombies approaching! You have to sho
 
 ### ToDo:
  * remove event listener at killed zombie
+ * too easy
